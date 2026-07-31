@@ -232,7 +232,7 @@ async function loadOnlineKey(){
 
     try{
 
-        const response = await fetch("YOUR_KEYS_JSON_URL");
+        const response = await fetch("https://raw.githubusercontent.com/GhostPing999/devmodz-key-system/main/keys.json");
 
         if(!response.ok){
             throw new Error("Network Error");
