@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GhostPing | Your Key</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:#09090f;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+
+}
+
+.container{
+
+width:100%;
+max-width:420px;
+
+}
+
+.card{
+
+background:#151525;
+border-radius:20px;
+padding:30px;
+text-align:center;
+box-shadow:0 0 30px rgba(0,0,0,.4);
+
+}
+
+.logo{
+
+width:95px;
+height:95px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:0 auto 20px;
+
+}
+
+h1{
+
+color:#ffffff;
+font-size:30px;
+
+}
+
+.subtitle{
+
+color:#bdbdbd;
+margin-top:8px;
+font-size:15px;
+
+}
+
+.status{
+
+margin-top:25px;
+padding:12px;
+background:#1d1d2f;
+border-radius:12px;
+color:#8cff8c;
+font-weight:bold;
+
+}
+
+.keyBox{
+
+margin-top:25px;
+background:#0f0f18;
+padding:18px;
+border-radius:15px;
+border:2px dashed #7b2cff;
+
+}
+
+#keyText{
+
+font-size:18px;
+font-weight:bold;
+color:#ffffff;
+word-break:break-all;
+
+}
+
+.btn{
+
+margin-top:25px;
+width:100%;
+height:55px;
+border:none;
+border-radius:15px;
+background:#7b2cff;
+color:#ffffff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+.footer{
+
+margin-top:20px;
+color:#777;
+font-size:12px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<img src="assets/logo.png" class="logo">
+
+<h1>GhostPing</h1>
+
+<p class="subtitle">
+Your secure key has been generated
+</p>
+
+<div class="status">
+✅ Verification Completed
+</div>
+
+<div class="keyBox">
+
+<div id="keyText">
+Loading Key...
+</div>
+
+</div>
+
+<button class="btn" onclick="copyKey()">
+COPY KEY
+</button>
+
+<div class="footer">
+GhostPing © 2026
+</div>
+
+</div>
+
+</div>
+
+  <script>
+
+function generateKey(){
+
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let key = "GHOST-";
+
+    for(let i=0;i<4;i++){
+
+        for(let j=0;j<4;j++){
+
+            key += chars.charAt(
+                Math.floor(Math.random()*chars.length)
+            );
+
+        }
+
+        if(i!=3){
+            key += "-";
+        }
+
+    }
+
+    document.getElementById("keyText").innerHTML = key;
+
+}
+
+function copyKey(){
+
+    const key =
+    document.getElementById("keyText").innerText;
+
+    navigator.clipboard.writeText(key).then(function(){
+
+        const btn =
+        document.querySelector(".btn");
+
+        btn.innerHTML="COPIED ✓";
+
+        setTimeout(function(){
+
+            btn.innerHTML="COPY KEY";
+
+        },2000);
+
+    });
+
+}
+
+window.onload=function(){
+
+    generateKey();
+
+};
+
+</script>
+
+</body>
+</html>
+
+<script>
+
+async function loadOnlineKey(){
+
+    try{
+
+        const response = await fetch("YOUR_KEYS_JSON_URL");
+
+        if(!response.ok){
+            throw new Error("Network Error");
+        }
+
+        const data = await response.json();
+
+        if(data.keys && data.keys.length > 0){
+
+            document.getElementById("keyText").innerHTML =
+                data.keys[0].key;
+
+        }else{
+
+            document.getElementById("keyText").innerHTML =
+                "NO KEY AVAILABLE";
+
+        }
+
+    }catch(e){
+
+        document.getElementById("keyText").innerHTML =
+            "FAILED TO LOAD KEY";
+
+    }
+
+}
+
+window.onload = function(){
+
+    loadOnlineKey();
+
+};
+
+</script>
+
+/* ===== GhostPing Premium UI ===== */
+
+.card{
+    background:linear-gradient(180deg,#17142b,#11111d);
+    border:1px solid rgba(123,44,255,.35);
+    box-shadow:0 0 45px rgba(123,44,255,.25);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 60px rgba(123,44,255,.45);
+}
+
+.logo{
+    border:3px solid #7b2cff;
+    box-shadow:0 0 25px rgba(123,44,255,.45);
+}
+
+h1{
+    background:linear-gradient(90deg,#ffffff,#7b2cff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    color:#bdbdf5;
+}
+
+.status{
+    background:#171a30;
+    border:1px solid rgba(0,255,136,.25);
+    color:#00ff88;
+}
+
+.keyBox{
+    background:#0c0d18;
+    border:2px solid #7b2cff;
+    box-shadow:inset 0 0 20px rgba(123,44,255,.15);
+}
+
+#keyText{
+    color:#00ff88;
+    font-size:20px;
+    letter-spacing:2px;
+    font-weight:bold;
+}
+
+.btn{
+    background:linear-gradient(90deg,#7b2cff,#9b4dff);
+    box-shadow:0 0 25px rgba(123,44,255,.45);
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 40px rgba(123,44,255,.75);
+}
+
+.footer{
+    color:#7f7f99;
+    letter-spacing:1px;
+}
