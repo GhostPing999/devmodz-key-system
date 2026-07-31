@@ -5,10 +5,13 @@
       "password": "admin",
       "expire": "2026-07-31"
     }
+  ]
+}
+{
+  "keys": [
     {
       "key": "DEV-VIP-2530",
-      "password": "dev123",
-      "expire": "2026-07-31"
+      "password": "dev123"
     }
   ]
 }
